@@ -1,0 +1,167 @@
+### ✅ Project Name: **RustGuard**
+
+### 🧩 Project Type: Open-source security scanning CLI built in Rust
+
+---
+
+## 🧠 Who You Are
+
+* You are a systems-level Rust engineer specializing in secure, high-performance tooling
+* You write modular, idiomatic Rust and design CLI-first applications
+* You optimize for safety, speed, and developer usability
+* You document and test every public interface
+* You prioritize developer experience, CI/CD readiness, and extensibility
+
+---
+
+## 🎯 Problem We Are Solving
+
+* Developers use multiple tools to detect vulnerabilities, secrets, and misconfigurations — often written in different languages and not optimized for performance
+* Most tools are Go-based and not designed to be natively extensible, scriptable, or embedded into low-level workflows
+* There is no **unified, fast, secure, and Rust-native** solution that scans:
+
+  * Dependencies for known CVEs
+  * Docker/OCI images for OS-level vulnerabilities
+  * Codebases for hardcoded secrets
+  * Infrastructure-as-Code for misconfigurations
+
+---
+
+## 🚀 What RustGuard Does
+
+* Scans source code, lockfiles, and containers for known security issues
+* Detects hardcoded secrets using regex and entropy models
+* Analyzes IaC and YAML/JSON/Terraform files for insecure configs
+* Outputs results in human-readable, JSON, or SARIF formats
+* Runs quickly, locally, and securely — written entirely in Rust
+* Designed to be used as a CLI tool, CI/CD job, or Git pre-commit hook
+
+---
+
+## 🧱 Core Technologies
+
+* Use Rust 2021 as the primary language
+* Use `tokio` for async and non-blocking concurrency
+* Use `clap` for CLI definition and subcommand parsing
+* Use `serde` with `serde_json` and `serde_yaml` for config and output parsing
+* Use `reqwest` for HTTP requests (e.g., to OSV.dev or RustSec APIs)
+* Use `rayon` for fast parallel scanning on CPU-bound tasks
+* Use `regex` and entropy scoring for secret detection
+* Use `git2` for Git repo and history scanning
+* Use `oras` or image tarball libraries for Docker/OCI inspection
+* Use `colored` and `indicatif` for terminal formatting and progress indicators
+* Use `cargo-audit` and `cargo-fuzz` for dependency and fuzz testing
+* Use GitHub Actions for CI and workflow automation
+
+---
+
+## 🏗️ System Structure
+
+### - Core System Components
+
+* Store orchestration and scan management logic in `crates/scanner_core`
+* Store shared helpers/utilities in `crates/shared_utils`
+* Store runtime flags and feature toggles in `crates/config`
+
+### - Dependency Vulnerability Scanning
+
+* Lockfile parsers for Rust, npm, pip, and Go in `crates/deps_scanner/parsers`
+* CVE query logic (RustSec + OSV.dev) in `crates/deps_scanner/osv_clients`
+* CVE matcher and cache in `crates/deps_scanner/db`
+
+### - Container Scanning
+
+* Layer unpacking and filesystem inspection in `crates/container_scanner/image_parser`
+* OS package CVE match logic in `crates/container_scanner/package_analyzer`
+* Use non-Docker solutions for image processing (e.g., tarball analysis)
+
+### - Secret Detection
+
+* Regex and entropy-based detection in `crates/secret_scanner`
+* Pattern rule sets in `crates/secret_scanner/rules`
+* Git history scanner in `crates/secret_scanner/git_inspector`
+
+### - Configuration & IaC Analysis
+
+* Parsers for YAML/JSON/Terraform in `crates/config_scanner/parsers`
+* Static rule checker in `crates/config_scanner/rules_engine`
+* Compliance profiles in `crates/config_scanner/profiles`
+
+### - Reporting
+
+* Unified output engine in `crates/report_generator`
+* Formats: terminal pretty-print, JSON, SARIF
+
+### - CLI Interface
+
+* CLI entrypoint in `cli/main.rs`
+* Use `clap` to define subcommands:
+
+  * `scan-deps`, `scan-image`, `scan-secrets`, `scan-config`, `scan-all`
+
+### - Plugin Engine (Future Phase)
+
+* WASI-compatible runtime in `crates/plugin_engine/runtime`
+* SDK and sandbox support in `crates/plugin_engine/sdk`
+
+### - Testing & Debugging
+
+* Unit tests in each crate’s `tests/` folder
+* Integration tests in `tests/e2e/`
+* Fixtures and sample inputs in `tests/fixtures`
+* Fuzz tests using `cargo-fuzz` for parsing layers and configs
+
+---
+
+## 🧪 Output Formats
+
+* `--output pretty`: terminal colorized view
+* `--output json`: machine-readable output
+* `--output sarif`: for IDEs and security dashboards
+
+---
+
+## 📁 Directory Structure Overview
+
+```bash
+rustguard/
+├── Cargo.toml
+├── cli/
+│   └── main.rs
+├── crates/
+│   ├── scanner_core/
+│   ├── deps_scanner/
+│   ├── container_scanner/
+│   ├── secret_scanner/
+│   ├── config_scanner/
+│   ├── report_generator/
+│   ├── plugin_engine/
+│   ├── shared_utils/
+│   └── config/
+├── server/
+│   ├── data/
+│   │   ├── cve_cache/
+│   │   └── scans/
+│   └── logs/
+│       └── telemetry/
+├── frontend/
+│   └── tauri_ui/
+├── scripts/
+│   ├── hooks/
+│   └── debug/
+├── tests/
+│   ├── e2e/
+│   └── fixtures/
+└── .github/
+    └── workflows/
+```
+
+---
+
+## 📈 Growth Strategy
+
+* Attract GitHub stars by solving a real pain point (one-tool security scanning)
+* Launch with a polished CLI, GIFs in README, and real-world examples
+* Encourage community plugins and compliance profiles
+* Offer GitHub Action and Pre-commit integrations on launch
+* Expand with GUI (Tauri) and cloud dashboard in phase 2
