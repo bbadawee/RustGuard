@@ -3,7 +3,7 @@
 [![GitHub stars](https://img.shields.io/github/stars/bzhar/RustGuard.svg?style=social)](https://github.com/bzhar/RustGuard/stargazers)
 [![GitHub license](https://img.shields.io/github/license/bzhar/RustGuard.svg)](https://github.com/bzhar/RustGuard/blob/master/LICENSE)
 [![Rust](https://img.shields.io/badge/rust-1.60+-blue.svg)](https://www.rust-lang.org)
-[![CI](https://github.com/bzhar/RustGuard/actions/workflows/ci.yml/badge.svg)](https://github.com/bzhar/RustGuard/actions/workflows/ci.yml)
+
 
 A unified, fast, and secure security scanning tool built in Rust. RustGuard helps developers detect security vulnerabilities, secrets, and configuration issues in their codebase, dependencies, and containers.
 
@@ -128,7 +128,6 @@ RustGuard is designed with security in mind:
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-Please read our [Contributing Guidelines](CONTRIBUTING.md) for more details.
 
 ## 📄 License
 
@@ -143,5 +142,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Support
 
 - Report bugs on [GitHub Issues](https://github.com/bzhar/RustGuard/issues)
-- Join our [Discord](https://discord.gg/rustguard) for support and discussion
-- Follow us on [Twitter](https://twitter.com/rustguard) for updates
+- Follow me on [Instagram](https://instagram.com/bbadawee)
